@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Mail, MapPin } from 'lucide-react'
+import { ArrowRight, Github, Mail, MapPin } from 'lucide-react'
 import { profile } from '../data'
 
 const initials = profile.name
@@ -43,6 +43,17 @@ export default function Hero() {
               <Mail size={16} />
               Contact Me
             </a>
+            {profile.github && (
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub profile"
+                className="inline-flex items-center justify-center rounded-md border border-border bg-white/[0.02] p-3 text-ink backdrop-blur-sm transition-colors duration-200 hover:border-accent/50 hover:bg-white/[0.04]"
+              >
+                <Github size={16} />
+              </a>
+            )}
           </div>
 
           <div className="mt-8 flex items-center gap-1.5 font-mono text-xs text-slate-light">
@@ -61,9 +72,17 @@ export default function Hero() {
           <div className="card card-hover w-full max-w-xs overflow-hidden">
             <div className="relative flex aspect-square items-center justify-center bg-accent-soft">
               <div className="pointer-events-none absolute inset-0 bg-hero-glow opacity-70" />
-              <span className="relative font-display text-6xl font-semibold text-accent-bright">
-                {initials}
-              </span>
+              {profile.photo ? (
+                <img
+                  src={profile.photo}
+                  alt={profile.name}
+                  className="relative h-full w-full object-cover object-top"
+                />
+              ) : (
+                <span className="relative font-display text-6xl font-semibold text-accent-bright">
+                  {initials}
+                </span>
+              )}
             </div>
             <div className="border-t border-border px-5 py-4">
               <p className="font-mono text-[11px] text-slate-light">role</p>

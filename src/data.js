@@ -4,9 +4,23 @@ export const profile = {
   headline: 'Aspiring Software Engineer — Building Projects in Java, AI & Web Technologies',
   email: 'akashvk5757@gmail.com',
   linkedin: 'https://www.linkedin.com/in/akashvk/',
+  // GitHub profile URL
+  github: 'https://github.com/AkashVK04',
+  // Profile photo (in public/profile.jpg)
+  photo: '/profile.jpg',
   location: 'Bengaluru, India',
   about:
     "I'm a Computer Science and Engineering student passionate about building practical software projects and learning modern technologies. I enjoy working with Java, React, AI-based applications, databases, and problem-solving — and I'm actively preparing for software engineering opportunities while continuously sharpening my technical skills.",
+}
+
+// Contact form delivery (sends messages straight to your Gmail inbox).
+// 1. Go to https://formspree.io and sign up free with your Gmail address.
+// 2. Create a new form, and copy the form ID from the endpoint Formspree gives you
+//    (it looks like https://formspree.io/f/xxxxaaaa — the "xxxxaaaa" part is the ID).
+// 3. Paste that ID below. Until you do, the form falls back to opening the visitor's
+//    email app with the message pre-filled (still works, just requires a click).
+export const contactConfig = {
+  formspreeId: '',
 }
 
 export const skillGroups = [
@@ -96,18 +110,23 @@ export const education = {
   cgpa: '7.54',
 }
 
+// Add a `link` (verification/credential URL) to any certificate to make its card
+// clickable and open the certificate in a new tab. Leave as null if you don't have one.
 export const certifications = [
   {
     title: 'HackerRank Java (Basics) Certificate',
     issuer: 'HackerRank',
+    link: null,
   },
   {
     title: 'HackerRank Problem Solving (Basics) Certificate',
     issuer: 'HackerRank',
+    link: null,
   },
   {
     title: 'Advanced Java Training',
     issuer: 'Ethnotech',
+    link: null,
   },
 ]
 
