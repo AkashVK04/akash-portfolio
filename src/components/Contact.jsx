@@ -70,15 +70,21 @@ export default function Contact() {
     setStatus('sending')
     setErrorMessage('')
 
-    const web3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || contactConfig.web3formsAccessKey
-    const formspreeId = import.meta.env.VITE_FORMSPREE_ID || contactConfig.formspreeId
+    const web3Key = (import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || contactConfig.web3formsAccessKey || '').trim()
+    const formspreeId = (import.meta.env.VITE_FORMSPREE_ID || contactConfig.formspreeId || '').trim()
+
+    if (!web3Key && !formspreeId) {
+      setStatus('error')
+      setErrorMessage('Form Access Key is missing. Please configure VITE_WEB3FORMS_ACCESS_KEY in environment variables or Vercel settings.')
+      return
+    }
 
     try {
       let res
       let data
 
       if (web3Key) {
-        // 1. Submit via Web3Forms API
+        // Submit via Web3Forms API
         res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
@@ -87,16 +93,16 @@ export default function Contact() {
           },
           body: JSON.stringify({
             access_key: web3Key,
-            name: form.name,
-            email: form.email,
-            subject: form.subject || `Portfolio Inquiry from ${form.name}`,
-            message: form.message,
+            name: form.name.trim(),
+            email: form.email.trim(),
+            subject: (form.subject || `Portfolio Inquiry from ${form.name}`).trim(),
+            message: form.message.trim(),
             from_name: 'Akash Portfolio Contact Form',
           }),
         })
         data = await res.json()
-      } else if (formspreeId) {
-        // 2. Submit via Formspree API
+      } else {
+        // Submit via Formspree API
         res = await fetch(`https://formspree.io/f/${formspreeId}`, {
           method: 'POST',
           headers: {
@@ -104,28 +110,10 @@ export default function Contact() {
             Accept: 'application/json',
           },
           body: JSON.stringify({
-            name: form.name,
-            email: form.email,
-            subject: form.subject || `Portfolio Inquiry from ${form.name}`,
-            message: form.message,
-          }),
-        })
-        data = await res.json()
-      } else {
-        // 3. Web3Forms submission with default/public key fallback
-        res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            access_key: '20f269a8-e160-4966-9ef0-e0477e38ae2c', // Default key placeholder / Web3Forms
-            name: form.name,
-            email: form.email,
-            subject: form.subject || `Portfolio Inquiry from ${form.name}`,
-            message: form.message,
-            from_name: 'Akash Portfolio Contact Form',
+            name: form.name.trim(),
+            email: form.email.trim(),
+            subject: (form.subject || `Portfolio Inquiry from ${form.name}`).trim(),
+            message: form.message.trim(),
           }),
         })
         data = await res.json()
@@ -136,7 +124,7 @@ export default function Contact() {
         setForm({ name: '', email: '', subject: '', message: '' })
       } else {
         setStatus('error')
-        setErrorMessage(data?.message || 'Unable to deliver message via form service.')
+        setErrorMessage(data?.message || 'Invalid Access Key or form delivery failure.')
       }
     } catch (err) {
       console.error('Contact form submission error:', err)

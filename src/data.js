@@ -14,8 +14,12 @@ export const profile = {
 
 // Contact form delivery configuration (Web3Forms / Formspree)
 export const contactConfig = {
-  web3formsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '',
-  formspreeId: import.meta.env.VITE_FORMSPREE_ID || '',
+  web3formsAccessKey: typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+    ? import.meta.env.VITE_WEB3FORMS_ACCESS_KEY.trim()
+    : '',
+  formspreeId: typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_FORMSPREE_ID
+    ? import.meta.env.VITE_FORMSPREE_ID.trim()
+    : '',
 }
 
 export const navLinks = [
