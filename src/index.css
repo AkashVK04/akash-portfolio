@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  background-color: #121212;
+}
+
+body {
+  background-color: #121212;
+  color: #E0E0E0;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+section {
+  scroll-margin-top: 80px;
+}
+
+::selection {
+  background-color: #A11D33;
+  color: #FFFFFF;
+}
+
+*:focus-visible {
+  outline: 2px solid #A11D33;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+::-webkit-scrollbar-thumb {
+  background: #282828;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A11D33;
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-widest text-[#A11D33] font-bold;
+  }
+
+  .chapter-tag {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#A11D33] font-bold;
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-wider uppercase leading-none;
+  }
+
+  .editorial-card {
+    @apply rounded-2xl border border-[#A11D33]/30 bg-[#181818] backdrop-blur-md transition-all duration-300;
+  }
+
+  .editorial-card-hover {
+    @apply hover:border-[#A11D33] hover:bg-[#1E1E1E] hover:shadow-card-hover;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-[#A11D33] px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#C51D38] hover:shadow-glow focus-visible:bg-[#C51D38] active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all duration-200 hover:border-[#A11D33]/60 hover:bg-white/[0.08] active:scale-[0.98];
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-[11px] font-medium text-slate transition-colors hover:border-[#A11D33]/50 hover:text-white;
+  }
+
+  .glass-nav {
+    @apply bg-[#121212]/90 backdrop-blur-xl border-b border-white/10;
+  }
+}
