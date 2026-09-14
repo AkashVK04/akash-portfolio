@@ -15,9 +15,7 @@ export const profile = {
 // Contact form delivery configuration (Web3Forms / Formspree)
 // Paste your Web3Forms access key directly below OR set VITE_WEB3FORMS_ACCESS_KEY in Vercel Environment Variables
 export const contactConfig = {
-  web3formsAccessKey: (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_WEB3FORMS_ACCESS_KEY)
-    ? import.meta.env.VITE_WEB3FORMS_ACCESS_KEY.trim()
-    : '',
+  web3formsAccessKey: 'e9942983-f8b9-48fd-b868-f2436d13b485',
   formspreeId: (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_FORMSPREE_ID)
     ? import.meta.env.VITE_FORMSPREE_ID.trim()
     : '',
